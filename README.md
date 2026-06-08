@@ -1,4 +1,4 @@
-# Mealplan
+# Prepbook
 
 A self-hosted meal & grocery planner for a two-person household. Manage
 recipes, plan meals on a weekly calendar, auto-generate grocery lists from
@@ -187,7 +187,7 @@ supabase/
 
 - **No unit conversion.** If the same ingredient appears in two units across
   recipes, the grocery list shows two lines (flagged in the UI).
-- **Recurrence** is weekly-on-a-weekday only; marking a recurring shop *done*
+- **Recurrence** is weekly-on-a-weekday only; marking a recurring shop _done_
   creates next week's shop.
 - **Coverage window**: a shop covers meals from the day after the previous
   shop's date through the shop's own date; the earliest shop starts from today.
