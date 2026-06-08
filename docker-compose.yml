@@ -1,0 +1,27 @@
+# Runs the Next.js app as a container. The Supabase stack is managed
+# separately by the Supabase CLI (`supabase start`) — see the README.
+#
+# Set HOST_IP to the mini PC's LAN address (e.g. 192.168.1.50) so both the
+# browser and this container resolve Supabase to the same reachable host.
+# Defaults to 127.0.0.1 for single-machine use.
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        # Public env is baked in at build time.
+        NEXT_PUBLIC_SUPABASE_URL: http://${HOST_IP:-127.0.0.1}:54321
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    image: mealplan-web
+    container_name: mealplan-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_SUPABASE_URL: http://${HOST_IP:-127.0.0.1}:54321
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+    # Reach the host's Supabase ports from inside the container.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
